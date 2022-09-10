@@ -7,6 +7,7 @@
 import requests
 
 from liblineage.constants.infra import GITHUB_ORG
+from liblineage.hudson.period import Period
 
 LINEAGE_BUILD_TARGETS_FILE = f"https://raw.githubusercontent.com/{GITHUB_ORG}/hudson/master/lineage-build-targets"
 
@@ -27,7 +28,8 @@ class BuildTarget:
 
 	@classmethod
 	def from_api(cls, line: str):
-		return cls(*line.split())
+		args = line.split()
+		return cls(args[0], args[1], args[2], Period(args[3]))
 
 	@classmethod
 	def get_lineage_build_targets(cls):
