@@ -21,4 +21,4 @@ class Device:
 		return FullUpdateInfo.get_nightlies(self.codename)
 
 	def get_hudson_build_target(self):
-		return BuildTarget.get_lineage_build_targets()[self.codename]
+		return BuildTarget.get_device(self.codename)

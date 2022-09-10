@@ -35,3 +35,9 @@ class BuildTarget:
 	def get_lineage_build_targets(cls):
 		response = requests.get(url=LINEAGE_BUILD_TARGETS_FILE).text.split("\n")
 		return [cls.from_api(line) for line in response if line and not line.startswith("#")]
+
+	@classmethod
+	def get_device(cls, device: str):
+		"""Get the build target given a device codename."""
+		# There can't be duplicates, plus this will miserably fail if this device isn't there
+		return [target for target in cls.get_lineage_build_targets() if target.device == device][0]
