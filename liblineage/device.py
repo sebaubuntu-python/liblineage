@@ -9,7 +9,9 @@ from liblineage.ota.full_update_info import FullUpdateInfo
 from liblineage.wiki.device_data import DeviceData
 
 class Device:
-	"""Class representing a LineageOS supported device."""
+	"""Class representing a LineageOS supported device.
+
+	Warning: This class is deprecated and will be removed in a future release."""
 	def __init__(self, codename: str):
 		"""Initialize the device."""
 		self.codename = codename
