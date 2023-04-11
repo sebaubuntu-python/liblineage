@@ -14,7 +14,6 @@ class Device:
 	- model (str): The model name of the device
 	- oem (str): The OEM name
 	- info_url (str): The URL of the device information page
-	- install_url (str): The URL of the installation instructions
 	- versions (list[str]): The LineageOS versions for this device (e.g. 18.1)
 	- dependencies (list[str]): The list of repositories used to build this device
 	"""
@@ -24,7 +23,6 @@ class Device:
 		model: str,
 		oem: str,
 		info_url: str,
-		install_url: str,
 		versions: List[str],
 		dependencies: List[str],
 	) -> None:
@@ -32,7 +30,6 @@ class Device:
 		self.model = model
 		self.oem = oem
 		self.info_url = info_url
-		self.install_url = install_url
 		self.versions = versions
 		self.dependencies = dependencies
 
@@ -44,7 +41,6 @@ class Device:
 			json["model"],
 			json["oem"],
 			json["info_url"],
-			json["install_url"],
 			json["versions"],
 			json["dependencies"],
 		)
