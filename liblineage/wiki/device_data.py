@@ -42,6 +42,7 @@ class DeviceData:
 	- peripherals: Peripherals supported by the device
 	- release: The release date of the device
 	- screen: Screen info
+	- soc: The SoC of the device
 	- tree: Device tree repository of the device
 	- type: The form factor of the device
 	- vendor: Brand name of the device vendor
@@ -88,6 +89,7 @@ class DeviceData:
 	             peripherals: Union[List[str], Dict[str, List[str]], None],
 	             release: Union[date, Dict[str, date]],
 	             screen: Union[ScreenData, Dict[str, ScreenData], None],
+	             soc: Union[str, List[str], Dict[str, str], None],
 	             tree: str,
 	             type: str,
 	             vendor: str,
@@ -133,6 +135,7 @@ class DeviceData:
 		self.peripherals = peripherals
 		self.release = release
 		self.screen = screen
+		self.soc = soc
 		self.tree = tree
 		self.type = type
 		self.vendor = vendor
@@ -181,6 +184,7 @@ class DeviceData:
 			peripherals = PeripheralsData.from_data(data["peripherals"]),
 			release = ReleaseData.from_data(data["release"]),
 			screen = ScreenData.from_data(data["screen"]),
+			soc = data["soc"],
 			tree = data["tree"],
 			type = data["type"],
 			vendor = data["vendor"],
@@ -233,6 +237,7 @@ class DeviceData:
 			"Peripherals": ", ".join(self.peripherals) if isinstance(self.peripherals, list) else ", ".join([f'{device}: {", ".join(peripherals)}' for device, peripherals in self.peripherals.items()]) if isinstance(self.peripherals, dict) else self.peripherals,
 			"Release": ", ".join([f'{device}: {date}' for device, date in self.release.items()]) if isinstance(self.release, dict) else self.release,
 			"Screen": ", ".join([f'{device}: {screen_data}' for device, screen_data in self.screen.items()]) if isinstance(self.screen, dict) else self.screen,
+			"SoC": ", ".join([f'{device}: {soc}' for device, soc in self.soc.items()]) if isinstance(self.soc, dict) else ", ".join(self.soc) if isinstance(self.soc, list) else self.soc,
 			"Device tree repository": f'{GITHUB_ORG_URL}/{self.tree}',
 			"Type": self.type,
 			"Vendor": self.vendor,
