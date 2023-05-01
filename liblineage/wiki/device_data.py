@@ -6,7 +6,7 @@
 
 from datetime import date
 import requests
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 import yaml
 
 from liblineage.constants.infra import GITHUB_ORG, GITHUB_ORG_URL
@@ -222,47 +222,47 @@ class DeviceData:
 	def __str__(self) -> str:
 		"""Return a string representation of the device data."""
 		infos = {
-			"Name": self.name,
-			"Codename": self.codename,
-			"Architecture": self.architecture,
-			"Battery": ", ".join([f'{device}: {battery_data}' for device, battery_data in self.battery.items()]) if isinstance(self.battery, dict) else self.battery,
-			"Bluetooth": self.bluetooth,
-			"CPU": self.cpu,
-			"CPU cores": self.cpu_cores,
-			"CPU frequency": self.cpu_freq,
-			"Dimensions": ", ".join([f'{device}: {dimensions_data}' for device, dimensions_data in self.dimensions.items()]) if isinstance(self.dimensions, dict) else self.dimensions,
-			"GPU": self.gpu,
+			"Name": self._print_data(self.name),
+			"Codename": self._print_data(self.codename),
+			"Architecture": self._print_data(self.architecture),
+			"Battery": self._print_data(self.battery),
+			"Bluetooth": self._print_data(self.bluetooth),
+			"CPU": self._print_data(self.cpu),
+			"CPU cores": self._print_data(self.cpu_cores),
+			"CPU frequency": self._print_data(self.cpu_freq),
+			"Dimensions": self._print_data(self.dimensions),
+			"GPU": self._print_data(self.gpu),
 			"Kernel repository": f"{GITHUB_ORG_URL}/{self.kernel}",
 			"Maintainers": ", ".join(self.maintainers) if self.maintainers else "None (unmaintained)",
-			"Peripherals": ", ".join(self.peripherals) if isinstance(self.peripherals, list) else ", ".join([f'{device}: {", ".join(peripherals)}' for device, peripherals in self.peripherals.items()]) if isinstance(self.peripherals, dict) else self.peripherals,
-			"Release": ", ".join([f'{device}: {date}' for device, date in self.release.items()]) if isinstance(self.release, dict) else self.release,
-			"Screen": ", ".join([f'{device}: {screen_data}' for device, screen_data in self.screen.items()]) if isinstance(self.screen, dict) else self.screen,
-			"SoC": ", ".join([f'{device}: {soc}' for device, soc in self.soc.items()]) if isinstance(self.soc, dict) else ", ".join(self.soc) if isinstance(self.soc, list) else self.soc,
+			"Peripherals": self._print_data(self.peripherals),
+			"Release": self._print_data(self.release),
+			"Screen": self._print_data(self.screen),
+			"SoC": self._print_data(self.soc),
 			"Device tree repository": f'{GITHUB_ORG_URL}/{self.tree}',
-			"Type": self.type,
-			"Vendor": self.vendor,
-			"Vendor (short)": self.vendor_short,
-			"Versions": ", ".join([f'{version}' for version in self.versions]),
+			"Type": self._print_data(self.type),
+			"Vendor": self._print_data(self.vendor),
+			"Vendor (short)": self._print_data(self.vendor_short),
+			"Versions": self._print_data(self.versions),
 		}
 
 		opt_infos = {
 			key: value for key, value in {
-				"Cameras": ", ".join([f'{camera}' for camera in self.cameras]) if isinstance(self.cameras, list) else self.cameras,
-				"Carrier": self.carrier,
-				"Custom recovery codename": self.custom_recovery_codename,
-				"Custom recovery link": self.custom_recovery_link,
-				"Custom unlock command": self.custom_unlock_cmd,
-				"Download boot": self.download_boot,
-				"Format on upgrade": self.format_on_upgrade,
-				"Has recovery partition": self.has_recovery_partition,
-				"Is A/B device": self.is_ab_device,
-				"Is unlockable": self.is_unlockable,
+				"Cameras": self._print_data(self.cameras),
+				"Carrier": self._print_data(self.carrier),
+				"Custom recovery codename": self._print_data(self.custom_recovery_codename),
+				"Custom recovery link": self._print_data(self.custom_recovery_link),
+				"Custom unlock command": self._print_data(self.custom_unlock_cmd),
+				"Download boot": self._print_data(self.download_boot),
+				"Format on upgrade": self._print_data(self.format_on_upgrade),
+				"Has recovery partition": self._print_data(self.has_recovery_partition),
+				"Is A/B device": self._print_data(self.is_ab_device),
+				"Is unlockable": self._print_data(self.is_unlockable),
 				"Models": ", ".join(self.models) if isinstance(self.models, list) else self.models,
-				"Network": ", ".join(self.network) if isinstance(self.network, list) else self.network,
-				"Recovery boot": self.recovery_boot,
-				"Required bootloader": self.required_bootloader,
-				"SD card": self.sdcard,
-				"Uses TWRP": self.uses_twrp,
+				"Network": self._print_data(self.network),
+				"Recovery boot": self._print_data(self.recovery_boot),
+				"Required bootloader": self._print_data(self.required_bootloader),
+				"SD card": self._print_data(self.sdcard),
+				"Uses TWRP": self._print_data(self.uses_twrp),
 			}.items()
 			if value is not None
 		}
@@ -271,3 +271,22 @@ class DeviceData:
 			**infos,
 			**opt_infos,
 		}.items()])
+
+	@staticmethod
+	def _print_data(data: Union[Any, List[Any], List[Dict[str, Any]], None]):
+		"""Return a string representation of the data."""
+		if isinstance(data, list):
+			if len(data) > 0 and isinstance(data[0], dict):
+				return "".join([
+					f"\n- {device}: {str(value)}"
+					for d in data
+					for device, value in d.items()
+				])
+			elif len(data) > 0 and isinstance(data[0], (complex, float, int, str)):
+				return ", ".join([str(value) for value in data])
+			else:
+				return "".join([f"\n - {value}" for value in data])
+		elif isinstance(data, dict):
+			return "".join([f"\n - {device}: {str(value)}" for device, value in data.items()])
+		else:
+			return str(data)
