@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -17,7 +17,7 @@ class BluetoothData(BaseData):
 	"""
 	def __init__(self,
 	             spec: str,
-	             profiles: List[str] = None
+	             profiles: Optional[List[str]] = None
 	            ):
 		"""Initialize the Bluetooth information."""
 		super().__init__()

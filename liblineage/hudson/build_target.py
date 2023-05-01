@@ -18,7 +18,7 @@ class BuildTarget:
 	             device: str,
 	             build_type: str,
 	             branch_name: str,
-	             period: str,
+	             period: Period,
 	            ):
 		self.device = device
 		self.build_type = build_type
@@ -74,3 +74,5 @@ class BuildTarget:
 				delta_day += month_to_days[today.month-1]
 
 			return today + timedelta(days=delta_day)
+
+		raise NotImplementedError(f"Unknown period {self.period}")

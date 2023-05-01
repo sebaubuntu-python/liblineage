@@ -6,7 +6,7 @@
 
 from datetime import date
 import requests
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Sequence, Union
 import yaml
 
 from liblineage.constants.infra import GITHUB_ORG, GITHUB_ORG_URL
@@ -99,7 +99,7 @@ class DeviceData:
 				 before_install: Union[str, None] = None,
 				 before_lineage_install: Union[str, None] = None,
 				 before_recovery_install: Union[str, None] = None,
-				 cameras: Union[List[CameraData], None] = None,
+				 cameras: Union[Sequence[CameraData], None] = None,
 				 carrier: Union[str, None] = None,
 				 custom_recovery_codename: Union[str, None] = None,
 				 custom_recovery_link: Union[str, None] = None,

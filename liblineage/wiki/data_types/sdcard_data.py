@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -17,7 +17,7 @@ class SdcardData(BaseData):
 	"""
 	def __init__(self,
 	             sizeMax: str,
-	             slot: str = None
+	             slot: Optional[str] = None
 	            ):
 		"""Initialize the sdcard information."""
 		super().__init__()

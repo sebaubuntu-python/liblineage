@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -19,7 +19,7 @@ class BatteryData(BaseData):
 	def __init__(self,
 	             capacity: int,
 	             removable: bool,
-	             tech: str = None,
+	             tech: Optional[str] = None,
 	            ):
 		"""Initialize the battery information."""
 		super().__init__()

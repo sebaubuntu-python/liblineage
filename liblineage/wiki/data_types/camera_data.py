@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Union
+from typing import Dict, List, Sequence, Union
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -26,7 +26,7 @@ class CameraData(BaseData):
 		self.flash = flash
 
 	@classmethod
-	def from_data(cls, data: Union[None, List[Dict]]) -> Union[None, List["CameraData"]]:
+	def from_data(cls, data: Union[None, List[Dict]]) -> Union[None, Sequence["CameraData"]]:
 		"""Create a camera information object from YAML data."""
 		if data is None:
 			camera = None
