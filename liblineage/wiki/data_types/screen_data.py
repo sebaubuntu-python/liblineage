@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Optional
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -16,12 +16,14 @@ class ScreenData(BaseData):
 	- density: The screen density (dpi)
 	- resolution: The screen resolution (e.g. 1080x1920)
 	- technology: The screen technology (e.g. LCD)
+	- refresh_rate: The screen refresh rate (e.g. 60)
 	"""
 	def __init__(self,
 	             size: str,
 	             density: int,
 	             resolution: str,
 	             technology: str,
+	             refresh_rate: Optional[str] = 60,
 	            ):
 		"""Initialize the screen information."""
 		super().__init__()
@@ -30,6 +32,7 @@ class ScreenData(BaseData):
 		self.density = density
 		self.resolution = resolution
 		self.technology = technology
+		self.refresh_rate = refresh_rate
 
 	@classmethod
 	def from_data(cls, data: Union[None, Dict, List, str]) -> Union[None, "ScreenData", Dict[str, "ScreenData"], None]:
