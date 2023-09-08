@@ -13,7 +13,6 @@ class ScreenData(BaseData):
 
 	Attributes:
 	- size: The screen size (inches)
-	- density: The screen density (dpi)
 	- resolution: The screen resolution (e.g. 1080x1920)
 	- technology: The screen technology (e.g. LCD)
 	- refresh_rate: Maximum screen refresh rate (Hz)
@@ -21,7 +20,6 @@ class ScreenData(BaseData):
 	def __init__(
 		self,
 		size: str,
-		density: int,
 		resolution: str,
 		technology: str,
 		refresh_rate: Optional[int] = None,
@@ -30,7 +28,6 @@ class ScreenData(BaseData):
 		super().__init__()
 
 		self.size = size
-		self.density = density
 		self.resolution = resolution
 		self.technology = technology
 		self.refresh_rate = refresh_rate
