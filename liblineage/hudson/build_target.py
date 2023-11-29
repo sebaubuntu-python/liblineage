@@ -52,7 +52,7 @@ class BuildTarget:
 			return today + timedelta(days=1)
 
 		random = Random()
-		random.seed(self.device, version=1)
+		random.seed(self.device, version=2)
 
 		if self.period == Period.WEEKLY:
 			day_of_week = int(1+7*random.random())
