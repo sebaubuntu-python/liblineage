@@ -15,6 +15,7 @@ from liblineage.wiki.data_types.battery_data import BatteryData
 from liblineage.wiki.data_types.bluetooth_data import BluetoothData
 from liblineage.wiki.data_types.camera_data import CameraData
 from liblineage.wiki.data_types.dimension_data import DimensionData
+from liblineage.wiki.data_types.kernel_data import KernelData
 from liblineage.wiki.data_types.peripherals_data import PeripheralsData
 from liblineage.wiki.data_types.release_data import ReleaseData
 from liblineage.wiki.data_types.screen_data import ScreenData
@@ -36,7 +37,7 @@ class DeviceData:
 	- gpu: GPU name
 	- image: The image of the device
 	- install_method: The install method of the device
-	- kernel: Kernel repository
+	- kernel: Kernel info
 	- maintainers: The maintainers of the device
 	- name: Commercial name of the device
 	- peripherals: Peripherals supported by the device
@@ -83,7 +84,7 @@ class DeviceData:
 	             gpu: str,
 	             image: str,
 	             install_method: str,
-	             kernel: str,
+	             kernel: Union[KernelData],
 	             maintainers: List[str],
 	             name: str,
 	             peripherals: Union[List[str], Dict[str, List[str]], None],
@@ -178,7 +179,7 @@ class DeviceData:
 			gpu = data["gpu"],
 			image = data["image"],
 			install_method = data["install_method"],
-			kernel = data["kernel"],
+			kernel = KernelData.from_data(data["kernel"]),
 			maintainers = data["maintainers"],
 			name = data["name"],
 			peripherals = PeripheralsData.from_data(data["peripherals"]),
@@ -232,7 +233,7 @@ class DeviceData:
 			"CPU frequency": self._print_data(self.cpu_freq),
 			"Dimensions": self._print_data(self.dimensions),
 			"GPU": self._print_data(self.gpu),
-			"Kernel repository": f"{GITHUB_ORG_URL}/{self.kernel}",
+			"Kernel": self._print_data(self.kernel),
 			"Maintainers": ", ".join(self.maintainers) if self.maintainers else "None (unmaintained)",
 			"Peripherals": self._print_data(self.peripherals),
 			"Release": self._print_data(self.release),
