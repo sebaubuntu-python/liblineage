@@ -16,10 +16,11 @@ class KernelData(BaseData):
 	- repo: Kernel repo
 	- version: Kernel version
 	"""
-	def __init__(self,
-	             repo: str,
-	             version: float,
-	            ):
+	def __init__(
+		self,
+		repo: str,
+		version: float,
+	):
 		"""Initialize the kernel information."""
 		super().__init__()
 

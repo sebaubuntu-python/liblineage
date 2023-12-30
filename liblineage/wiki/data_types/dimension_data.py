@@ -16,11 +16,12 @@ class DimensionData(BaseData):
 	- width: The width
 	- depth: The depth
 	"""
-	def __init__(self,
-	             height: str,
-	             width: str,
-	             depth: str,
-	            ):
+	def __init__(
+		self,
+		height: str,
+		width: str,
+		depth: str,
+	):
 		"""Initialize the dimension information."""
 		super().__init__()
 

@@ -16,11 +16,12 @@ class BatteryData(BaseData):
 	- removable: Whether the battery is removable
 	- tech: The battery technology
 	"""
-	def __init__(self,
-	             capacity: int,
-	             removable: bool,
-	             tech: Optional[str] = None,
-	            ):
+	def __init__(
+		self,
+		capacity: int,
+		removable: bool,
+		tech: Optional[str] = None,
+	):
 		"""Initialize the battery information."""
 		super().__init__()
 

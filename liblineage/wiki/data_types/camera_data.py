@@ -15,10 +15,11 @@ class CameraData(BaseData):
 	- info: The camera info (in MP)
 	- flash: Flash unit info
 	"""
-	def __init__(self,
-	             info: str,
-	             flash: str,
-	            ):
+	def __init__(
+		self,
+		info: str,
+		flash: str,
+	):
 		"""Initialize the camera information."""
 		super().__init__()
 

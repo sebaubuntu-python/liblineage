@@ -15,10 +15,11 @@ class BluetoothData(BaseData):
 	- spec: Bluetooth specification
 	- profiles: Bluetooth profile
 	"""
-	def __init__(self,
-	             spec: str,
-	             profiles: Optional[List[str]] = None
-	            ):
+	def __init__(
+		self,
+		spec: str,
+		profiles: Optional[List[str]] = None,
+	):
 		"""Initialize the Bluetooth information."""
 		super().__init__()
 

@@ -15,10 +15,11 @@ class ArchitectureData(BaseData):
 	- cpu: CPU architecture
 	- userspace: Userspace architecture
 	"""
-	def __init__(self,
-				 cpu: str,
-				 userspace: str,
-				):
+	def __init__(
+		self,
+		cpu: str,
+		userspace: str,
+	):
 		"""Initialize the architecture information."""
 		super().__init__()
 
