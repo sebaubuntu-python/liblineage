@@ -216,7 +216,7 @@ class DeviceData:
 
 	@classmethod
 	def get_device_data(cls, device: str) -> "DeviceData":
-		url = f"https://raw.githubusercontent.com/{GITHUB_ORG}/lineage_wiki/master/_data/devices/{device}.yml"
+		url = f"https://raw.githubusercontent.com/{GITHUB_ORG}/lineage_wiki/main/_data/devices/{device}.yml"
 		response = requests.get(url=url)
 		response.raise_for_status()
 		return cls.from_dict(yaml.safe_load(response.text))
