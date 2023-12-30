@@ -14,12 +14,13 @@ from liblineage.hudson.period import Period
 LINEAGE_BUILD_TARGETS_FILE = f"https://raw.githubusercontent.com/{GITHUB_ORG}/hudson/main/lineage-build-targets"
 
 class BuildTarget:
-	def __init__(self,
-	             device: str,
-	             build_type: str,
-	             branch_name: str,
-	             period: Period,
-	            ):
+	def __init__(
+		self,
+		device: str,
+		build_type: str,
+		branch_name: str,
+		period: Period,
+	):
 		self.device = device
 		self.build_type = build_type
 		self.branch_name = branch_name

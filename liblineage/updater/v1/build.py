@@ -19,15 +19,16 @@ class Build:
 	- url (str): The URL to download the OTA zip
 	- version (str): The LineageOS version of the update (e.g. 18.1)
 	"""
-	def __init__(self,
-		         datetime: datetime,
-		         filename: str,
-				 id: str,
-				 romtype: str,
-				 size: int,
-				 url: str,
-				 version: str,
-		        ):
+	def __init__(
+		self,
+		datetime: datetime,
+		filename: str,
+		id: str,
+		romtype: str,
+		size: int,
+		url: str,
+		version: str,
+	):
 		"""Initialize the full update information."""
 		self.datetime = datetime
 		self.filename = filename
