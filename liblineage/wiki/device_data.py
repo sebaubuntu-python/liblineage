@@ -6,7 +6,7 @@
 
 from datetime import date
 import requests
-from typing import Any, Dict, List, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 import yaml
 
 from liblineage.constants.infra import GITHUB_ORG, GITHUB_ORG_URL
@@ -71,52 +71,53 @@ class DeviceData:
 	- sdcard: The SD card info of the device
 	- uses_twrp: Whether the device uses TWRP
 	"""
-	def __init__(self,
-	             architecture: Union[str, ArchitectureData],
-	             battery: Union[BatteryData, Dict[str, BatteryData], None],
-	             bluetooth: Union[BluetoothData, None],
-	             codename: str,
-	             cpu: str,
-	             cpu_cores: Union[int, str],
-	             cpu_freq: str,
-	             current_branch: float,
-	             dimensions: Union[DimensionData, Dict[str, DimensionData], None],
-	             gpu: str,
-	             image: str,
-	             install_method: str,
-	             kernel: Union[KernelData],
-	             maintainers: List[str],
-	             name: str,
-	             peripherals: Union[List[str], Dict[str, List[str]], None],
-	             release: Union[date, Dict[str, date]],
-	             screen: Union[ScreenData, Dict[str, ScreenData], None],
-	             soc: Union[str, List[str], Dict[str, str], None],
-	             tree: str,
-	             type: str,
-	             vendor: str,
-	             vendor_short: str,
-	             versions: List[float],
+	def __init__(
+		self,
+		architecture: Union[str, ArchitectureData],
+		battery: Optional[Union[BatteryData, Dict[str, BatteryData]]],
+		bluetooth: Optional[BluetoothData],
+		codename: str,
+		cpu: str,
+		cpu_cores: Union[int, str],
+		cpu_freq: str,
+		current_branch: float,
+		dimensions: Optional[Union[DimensionData, Dict[str, DimensionData]]],
+		gpu: str,
+		image: str,
+		install_method: str,
+		kernel: Optional[KernelData],
+		maintainers: List[str],
+		name: str,
+		peripherals: Optional[Union[List[str], Dict[str, List[str]]]],
+		release: Union[date, Dict[str, date]],
+		screen: Optional[Union[ScreenData, Dict[str, ScreenData]]],
+		soc: Optional[Union[str, List[str], Dict[str, str]]],
+		tree: str,
+		type: str,
+		vendor: str,
+		vendor_short: str,
+		versions: List[float],
 
-				 before_install: Union[str, None] = None,
-				 before_lineage_install: Union[str, None] = None,
-				 before_recovery_install: Union[str, None] = None,
-				 cameras: Union[Sequence[CameraData], None] = None,
-				 carrier: Union[str, None] = None,
-				 custom_recovery_codename: Union[str, None] = None,
-				 custom_recovery_link: Union[str, None] = None,
-				 custom_unlock_cmd: Union[str, None] = None,
-				 download_boot: Union[str, None] = None,
-				 format_on_upgrade: Union[bool, None] = None,
-				 has_recovery_partition: Union[bool, None] = None,
-				 is_ab_device: Union[bool, None] = None,
-				 is_unlockable: Union[bool, None] = None,
-				 models: Union[List[str], None] = None,
-				 network: Union[List[str], None] = None,
-				 recovery_boot: Union[str, None] = None,
-				 required_bootloader: Union[List[str], None] = None,
-				 sdcard: Union[SdcardData, None] = None,
-				 uses_twrp: Union[bool, None] = None,
-	            ):
+		before_install: Optional[str] = None,
+		before_lineage_install: Optional[str] = None,
+		before_recovery_install: Optional[str] = None,
+		cameras: Optional[Sequence[CameraData]] = None,
+		carrier: Optional[str] = None,
+		custom_recovery_codename: Optional[str] = None,
+		custom_recovery_link: Optional[str] = None,
+		custom_unlock_cmd: Optional[str] = None,
+		download_boot: Optional[str] = None,
+		format_on_upgrade: Optional[bool] = None,
+		has_recovery_partition: Optional[bool] = None,
+		is_ab_device: Optional[bool] = None,
+		is_unlockable: Optional[bool] = None,
+		models: Optional[List[str]] = None,
+		network: Optional[List[str]] = None,
+		recovery_boot: Optional[str] = None,
+		required_bootloader: Optional[List[str]] = None,
+		sdcard: Optional[SdcardData] = None,
+		uses_twrp: Optional[bool] = None,
+	):
 		"""Initialize the device information."""
 		self.architecture = architecture
 		self.battery = battery
@@ -164,7 +165,7 @@ class DeviceData:
 		self.uses_twrp = uses_twrp
 
 	@classmethod
-	def from_dict(cls, data: Dict):
+	def from_dict(cls, data: Dict[str, Any]):
 		"""Create a device data object from a dictionary."""
 		return cls(
 			architecture = ArchitectureData.from_data(data["architecture"]),
@@ -214,7 +215,7 @@ class DeviceData:
 		)
 
 	@classmethod
-	def get_device_data(cls, device: str):
+	def get_device_data(cls, device: str) -> "DeviceData":
 		url = f"https://raw.githubusercontent.com/{GITHUB_ORG}/lineage_wiki/master/_data/devices/{device}.yml"
 		response = requests.get(url=url)
 		response.raise_for_status()
@@ -274,7 +275,7 @@ class DeviceData:
 		}.items()])
 
 	@staticmethod
-	def _print_data(data: Union[Any, List[Any], List[Dict[str, Any]], None]):
+	def _print_data(data: Optional[Union[Any, List[Any], List[Dict[str, Any]]]]) -> str:
 		"""Return a string representation of the data."""
 		if isinstance(data, list):
 			if len(data) > 0 and isinstance(data[0], dict):

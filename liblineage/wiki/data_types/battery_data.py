@@ -30,7 +30,7 @@ class BatteryData(BaseData):
 		self.tech = tech
 
 	@classmethod
-	def from_data(cls, data: Union[None, Dict, List, str]) -> Union[None, "BatteryData", Dict[str, "BatteryData"], None]:
+	def from_data(cls, data: Optional[Union[Dict, List, str]]) -> Optional[Union["BatteryData", Dict[str, "BatteryData"]]]:
 		"""Create a battery information object from YAML data."""
 		if data is None:
 			battery = None

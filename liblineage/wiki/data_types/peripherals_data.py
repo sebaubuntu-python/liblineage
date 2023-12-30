@@ -4,12 +4,12 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 class PeripheralsData:
 	"""LineageOS peripherals information."""
 	@classmethod
-	def from_data(cls, data: Union[None, List, str]) -> Union[None, List[str], Dict[str, List[str]], None]:
+	def from_data(cls, data: Optional[Union[List, str]]) -> Optional[Union[List[str], Dict[str, List[str]]]]:
 		"""Create a peripherals information object from YAML data."""
 		if data is None:
 			peripherals = None

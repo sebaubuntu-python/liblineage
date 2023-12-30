@@ -33,7 +33,7 @@ class ScreenData(BaseData):
 		self.refresh_rate = refresh_rate
 
 	@classmethod
-	def from_data(cls, data: Union[None, Dict, List, str]) -> Union[None, "ScreenData", Dict[str, "ScreenData"], None]:
+	def from_data(cls, data: Optional[Union[Dict, List, str]]) -> Optional[Union["ScreenData", Dict[str, "ScreenData"]]]:
 		"""Create a screen information object from YAML data."""
 		if data is None:
 			screen = None

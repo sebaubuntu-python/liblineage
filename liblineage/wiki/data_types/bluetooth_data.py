@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -27,7 +27,7 @@ class BluetoothData(BaseData):
 		self.profiles = profiles or []
 
 	@classmethod
-	def from_data(cls, data: Union[None, Dict]) -> Union[None, "BluetoothData"]:
+	def from_data(cls, data: Optional[Dict]) -> Optional["BluetoothData"]:
 		"""Create a Bluetooth information object from YAML data."""
 		if data is None:
 			bluetooth = None

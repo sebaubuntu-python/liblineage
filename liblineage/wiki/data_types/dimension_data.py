@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -30,7 +30,7 @@ class DimensionData(BaseData):
 		self.depth = depth
 
 	@classmethod
-	def from_data(cls, data: Union[None, Dict, List, str]) -> Union[None, "DimensionData", Dict[str, "DimensionData"], None]:
+	def from_data(cls, data: Optional[Union[Dict, List, str]]) -> Optional[Union["DimensionData", Dict[str, "DimensionData"]]]:
 		"""Create a dimension information object from YAML data."""
 		if data is None:
 			dimensions = None

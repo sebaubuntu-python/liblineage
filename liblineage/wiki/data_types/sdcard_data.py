@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, Optional, Union
+from typing import Dict, Optional
 
 from liblineage.wiki.data_types.base_data import BaseData
 
@@ -27,7 +27,7 @@ class SdcardData(BaseData):
 		self.slot = slot
 
 	@classmethod
-	def from_data(cls, data: Union[None, Dict]) -> Union[None, "SdcardData"]:
+	def from_data(cls, data: Optional[Dict]) -> Optional["SdcardData"]:
 		"""Create a sdcard information object from YAML data."""
 		if data is None:
 			sdcard = None

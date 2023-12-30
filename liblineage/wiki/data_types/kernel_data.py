@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
 
-from typing import Dict, Union
+from typing import Dict, Optional
 
 from liblineage.constants.infra import GITHUB_ORG_URL
 from liblineage.wiki.data_types.base_data import BaseData
@@ -28,7 +28,7 @@ class KernelData(BaseData):
 		self.version = version
 
 	@classmethod
-	def from_data(cls, data: Union[None, Dict]) -> Union[None, "KernelData"]:
+	def from_data(cls, data: Optional[Dict]) -> Optional["KernelData"]:
 		"""Create a kernel information object from YAML data."""
 		if data is None:
 			kernel = None
