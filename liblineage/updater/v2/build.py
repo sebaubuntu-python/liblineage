@@ -16,16 +16,25 @@ class Build:
 	- date (str): The date of the build, in ISO 8601 format
 	- datetime (datetime): The date of the build, as a date object
 	- files (list[BuildFile]): List of files belonging to this build, first one being the OTA zip
+	- os_path_level (str): The OS path level of the build in the format "YYYY-MM"
+	- build_type (str): The type of the build (nightly, weekly, etc.)
+	- version (str): The version of the build (e.g. 21.0)
 	"""
 	def __init__(
 		self,
 		date: str,
 		datetime: datetime,
 		files: List[BuildFile],
+		os_path_level: str,
+		build_type: str,
+		version: str,
 	) -> None:
 		self.date = date
 		self.datetime = datetime
 		self.files = files
+		self.os_path_level = os_path_level
+		self.build_type = build_type
+		self.version = version
 
 		self.ota_zip = self.files[0]
 
@@ -37,4 +46,7 @@ class Build:
 			json["date"],
 			datetime.fromtimestamp(json["datetime"]),
 			[BuildFile.from_json(file) for file in json["files"]],
+			json["os_path_level"],
+			json["type"],
+			json["version"],
 		)
