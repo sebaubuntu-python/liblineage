@@ -16,7 +16,7 @@ class Build:
 	- date (str): The date of the build, in ISO 8601 format
 	- datetime (datetime): The date of the build, as a date object
 	- files (list[BuildFile]): List of files belonging to this build, first one being the OTA zip
-	- os_path_level (str): The OS path level of the build in the format "YYYY-MM"
+	- os_patch_level (str): The OS patch level of the build in the format "YYYY-MM"
 	- build_type (str): The type of the build (nightly, weekly, etc.)
 	- version (str): The version of the build (e.g. 21.0)
 	"""
@@ -25,14 +25,14 @@ class Build:
 		date: str,
 		datetime: datetime,
 		files: List[BuildFile],
-		os_path_level: str,
+		os_patch_level: str,
 		build_type: str,
 		version: str,
 	) -> None:
 		self.date = date
 		self.datetime = datetime
 		self.files = files
-		self.os_path_level = os_path_level
+		self.os_patch_level = os_patch_level
 		self.build_type = build_type
 		self.version = version
 
@@ -46,7 +46,7 @@ class Build:
 			json["date"],
 			datetime.fromtimestamp(json["datetime"]),
 			[BuildFile.from_json(file) for file in json["files"]],
-			json["os_path_level"],
+			json["os_patch_level"],
 			json["type"],
 			json["version"],
 		)
