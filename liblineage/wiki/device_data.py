@@ -6,7 +6,7 @@
 
 from datetime import date
 import requests
-from typing import Any, Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Literal, Optional, Sequence, Union
 import yaml
 
 from liblineage.constants.infra import GITHUB_ORG, GITHUB_ORG_URL
@@ -16,6 +16,7 @@ from liblineage.wiki.data_types.bluetooth_data import BluetoothData
 from liblineage.wiki.data_types.camera_data import CameraData
 from liblineage.wiki.data_types.dimension_data import DimensionData
 from liblineage.wiki.data_types.kernel_data import KernelData
+from liblineage.wiki.data_types.network_data import NetworkData
 from liblineage.wiki.data_types.peripherals_data import PeripheralsData
 from liblineage.wiki.data_types.release_data import ReleaseData
 from liblineage.wiki.data_types.screen_data import ScreenData
@@ -40,6 +41,7 @@ class DeviceData:
 	- kernel: Kernel info
 	- maintainers: The maintainers of the device
 	- name: Commercial name of the device
+	- network: The network of the device
 	- peripherals: Peripherals supported by the device
 	- release: The release date of the device
 	- screen: Screen info
@@ -49,6 +51,7 @@ class DeviceData:
 	- vendor: Brand name of the device vendor
 	- vendor_short: Short name of the device vendor
 	- versions: The versions of the device
+	- wifi: The supported Wi-Fi bands of the device
 
 	Optional attributes:
 	- before_install: The before_install script for the device
@@ -65,7 +68,6 @@ class DeviceData:
 	- is_ab_device: Whether the device is an A/B device
 	- is_unlockable: Whether the device is unlockable
 	- models: The models of the device
-	- network: The network of the device
 	- recovery_boot: The recovery boot of the device
 	- required_bootloader: The required bootloader of the device
 	- sdcard: The SD card info of the device
@@ -88,15 +90,17 @@ class DeviceData:
 		kernel: Optional[KernelData],
 		maintainers: List[str],
 		name: str,
+		network: Optional[Union[List[str], Dict[str, List[str]]]],
 		peripherals: Optional[Union[List[str], Dict[str, List[str]]]],
 		release: Union[date, Dict[str, date]],
 		screen: Optional[Union[ScreenData, Dict[str, ScreenData]]],
-		soc: Optional[Union[str, List[str], Dict[str, str]]],
+		soc: Optional[Union[str, List[str]]],
 		tree: str,
 		type: str,
 		vendor: str,
 		vendor_short: str,
 		versions: List[float],
+		wifi: str,
 
 		before_install: Optional[str] = None,
 		before_lineage_install: Optional[str] = None,
@@ -112,11 +116,10 @@ class DeviceData:
 		is_ab_device: Optional[bool] = None,
 		is_unlockable: Optional[bool] = None,
 		models: Optional[List[str]] = None,
-		network: Optional[List[str]] = None,
 		recovery_boot: Optional[str] = None,
 		required_bootloader: Optional[List[str]] = None,
 		sdcard: Optional[SdcardData] = None,
-		uses_twrp: Optional[bool] = None,
+		uses_twrp: Optional[Literal[True]] = None,
 	):
 		"""Initialize the device information."""
 		self.architecture = architecture
@@ -134,6 +137,7 @@ class DeviceData:
 		self.kernel = kernel
 		self.maintainers = maintainers
 		self.name = name
+		self.network = network
 		self.peripherals = peripherals
 		self.release = release
 		self.screen = screen
@@ -143,6 +147,7 @@ class DeviceData:
 		self.vendor = vendor
 		self.vendor_short = vendor_short
 		self.versions = versions
+		self.wifi = wifi
 
 		self.before_install = before_install
 		self.before_lineage_install = before_lineage_install
@@ -158,7 +163,6 @@ class DeviceData:
 		self.is_ab_device = is_ab_device
 		self.is_unlockable = is_unlockable
 		self.models = models
-		self.network = network
 		self.recovery_boot = recovery_boot
 		self.required_bootloader = required_bootloader
 		self.sdcard = sdcard
@@ -183,6 +187,7 @@ class DeviceData:
 			kernel = KernelData.from_data(data["kernel"]),
 			maintainers = data["maintainers"],
 			name = data["name"],
+			network = NetworkData.from_data(data["network"]),
 			peripherals = PeripheralsData.from_data(data["peripherals"]),
 			release = ReleaseData.from_data(data["release"]),
 			screen = ScreenData.from_data(data["screen"]),
@@ -192,6 +197,7 @@ class DeviceData:
 			vendor = data["vendor"],
 			vendor_short = data["vendor_short"],
 			versions = data["versions"],
+			wifi = data["wifi"],
 
 			before_install = data.get("before_install"),
 			before_lineage_install = data.get("before_lineage_install"),
@@ -207,7 +213,6 @@ class DeviceData:
 			is_ab_device = data.get("is_ab_device"),
 			is_unlockable = data.get("is_unlockable"),
 			models = data.get("models"),
-			network = data.get("network"),
 			recovery_boot = data.get("recovery_boot"),
 			required_bootloader = data.get("required_bootloader"),
 			sdcard = SdcardData.from_data(data.get("sdcard")),

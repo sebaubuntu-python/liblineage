@@ -12,18 +12,18 @@ class SdcardData(BaseData):
 	"""The format required for the sdcard property.
 
 	Attributes:
-	- sizeMax: Maximum size for a sdcard
+	- size_max: Maximum size for a sdcard
 	- slot: where the sdcard is inserted
 	"""
 	def __init__(
 		self,
-		sizeMax: str,
+		size_max: str,
 		slot: Optional[str] = None,
 	):
 		"""Initialize the sdcard information."""
 		super().__init__()
 
-		self.sizeMax = sizeMax
+		self.size_max = size_max
 		self.slot = slot
 
 	@classmethod
