@@ -52,11 +52,10 @@ class BuildTarget:
 		if self.period == Period.NIGHTLY:
 			return today + timedelta(days=1)
 
-		random = Random()
-		random.seed(self.device, version=2)
+		random = Random(self.device)
 
 		if self.period == Period.WEEKLY:
-			day_of_week = int(1+7*random.random())
+			day_of_week = random.randint(1, 7)
 			delta_day = day_of_week - today.isoweekday()
 
 			if delta_day <= 0:
@@ -66,7 +65,7 @@ class BuildTarget:
 			return today + timedelta(days=delta_day)
 
 		if self.period == Period.MONTHLY:
-			day_of_month = int(1+28*random.random())
+			day_of_month = random.randint(1, 28)
 			delta_day = day_of_month - today.day
 
 			if delta_day <= 0:
