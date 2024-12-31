@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "liblineage"
-version = "1.4.4"
+version = "1.5.0"
 description = "LineageOS utils library"
 authors = ["Sebastiano Barezzi <barezzisebastiano@gmail.com>"]
 license = "LGPL-3.0-or-later"
