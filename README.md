@@ -5,18 +5,18 @@
 
 LineageOS utils library
 
-Requires Python 3.8 or greater
+Requires Python 3.9 or greater
 
 ## Installation
 
 ```sh
-pip3 install liblineage
+pip install liblineage
 ```
 
 ## Instructions
 
 ```sh
-python3 -m liblineage
+python -m liblineage
 ```
 
 Complete documentation at [Read the Docs](https://liblineage.readthedocs.io)
