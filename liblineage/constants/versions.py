@@ -26,6 +26,7 @@ for key, value in {
 	"22.0": AndroidVersion.VANILLA_ICE_CREAM,
 	"22.1": AndroidVersion.VANILLA_ICE_CREAM,
 	"22.2": AndroidVersion.VANILLA_ICE_CREAM,
+	"23.0": AndroidVersion.BAKLAVA,
 }.items():
 	LINEAGEOS_TO_ANDROID_VERSION[key] = value
 	ANDROID_TO_LINEAGEOS_VERSION[value] = key
