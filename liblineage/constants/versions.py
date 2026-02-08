@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2022-2024 The LineageOS Project
+# Copyright (C) 2022-2026 The LineageOS Project
 #
 # SPDX-License-Identifier: LGPL-3.0-or-later
 #
@@ -27,6 +27,8 @@ for key, value in {
 	"22.1": AndroidVersion.VANILLA_ICE_CREAM,
 	"22.2": AndroidVersion.VANILLA_ICE_CREAM,
 	"23.0": AndroidVersion.BAKLAVA,
+	"23.1": AndroidVersion.BAKLAVA,
+	"23.2": AndroidVersion.BAKLAVA,
 }.items():
 	LINEAGEOS_TO_ANDROID_VERSION[key] = value
 	ANDROID_TO_LINEAGEOS_VERSION[value] = key
