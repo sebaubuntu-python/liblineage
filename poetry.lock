@@ -1172,14 +1172,14 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "sebaubuntu-libs"
-version = "1.6.1"
+version = "2.0.0"
 description = "SebaUbuntu's shared libs"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "sebaubuntu_libs-1.6.1-py3-none-any.whl", hash = "sha256:8045dd75b7fadb735a0e798ececf261d9d07a316f04bc252eabe98b1f754fed1"},
-    {file = "sebaubuntu_libs-1.6.1.tar.gz", hash = "sha256:7612b8c9518080faf3f8042fbb49381f3119259213087efae66896e6aa67ee29"},
+    {file = "sebaubuntu_libs-2.0.0-py3-none-any.whl", hash = "sha256:2c656ba819c9623729a4a889813fb5a148d7a418dac9a6270a422c62126aba79"},
+    {file = "sebaubuntu_libs-2.0.0.tar.gz", hash = "sha256:fb819054ef4418086c4578d9b8b597de7df82733b4825d9559358024c248fa2b"},
 ]
 
 [package.dependencies]
@@ -1657,4 +1657,4 @@ docs = ["sphinx", "sphinx-rtd-theme"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.9"
-content-hash = "cdac3cd1b8ae7b0405711d0853d796b458807f892269332b03978a382d7aaa5b"
+content-hash = "ae974d4df676955a9694f6a7fc4b0850a6ceec083af54b22177ea072a98b5170"
