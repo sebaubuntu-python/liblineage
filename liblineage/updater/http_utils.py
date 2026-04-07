@@ -6,14 +6,16 @@
 import aiohttp
 import requests
 
+
 class AsyncHttpRequests:
-	@classmethod
-	async def get_json(cls, url: str, **kwargs):
-		async with aiohttp.ClientSession() as session:
-			async with session.get(url, **kwargs) as resp:
-				return await resp.json()
+    @classmethod
+    async def get_json(cls, url: str, **kwargs):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, **kwargs) as resp:
+                return await resp.json()
+
 
 class SyncHttpRequests:
-	@classmethod
-	def get_json(cls, url: str, **kwargs):
-		return requests.get(url, **kwargs).json()
+    @classmethod
+    def get_json(cls, url: str, **kwargs):
+        return requests.get(url, **kwargs).json()

@@ -7,32 +7,34 @@ from typing import Dict, Union
 
 from liblineage.wiki.data_types.base_data import BaseData
 
+
 class ArchitectureData(BaseData):
-	"""LineageOS architecture information.
+    """LineageOS architecture information.
 
-	Attributes:
-	- cpu: CPU architecture
-	- userspace: Userspace architecture
-	"""
-	def __init__(
-		self,
-		cpu: str,
-		userspace: str,
-	):
-		"""Initialize the architecture information."""
-		super().__init__()
+    Attributes:
+    - cpu: CPU architecture
+    - userspace: Userspace architecture
+    """
 
-		self.cpu = cpu
-		self.userspace = userspace
+    def __init__(
+        self,
+        cpu: str,
+        userspace: str,
+    ):
+        """Initialize the architecture information."""
+        super().__init__()
 
-	@classmethod
-	def from_data(cls, data: Union[str, Dict]) -> Union[str, "ArchitectureData"]:
-		"""Create a architecture information object from YAML data."""
-		if isinstance(data, str):
-			architecture = data
-		elif isinstance(data, dict):
-			architecture = cls.from_dict(data)
-		else:
-			raise Exception("Invalid architecture data")
+        self.cpu = cpu
+        self.userspace = userspace
 
-		return architecture
+    @classmethod
+    def from_data(cls, data: Union[str, Dict]) -> Union[str, "ArchitectureData"]:
+        """Create a architecture information object from YAML data."""
+        if isinstance(data, str):
+            architecture = data
+        elif isinstance(data, dict):
+            architecture = cls.from_dict(data)
+        else:
+            raise Exception("Invalid architecture data")
+
+        return architecture

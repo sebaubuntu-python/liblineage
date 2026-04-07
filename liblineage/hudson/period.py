@@ -5,8 +5,10 @@
 
 from enum import Enum
 
+
 class Period(Enum):
-	"""Enum representing a build period"""
-	NIGHTLY = "N"
-	WEEKLY = "W"
-	MONTHLY = "M"
+    """Enum representing a build period"""
+
+    NIGHTLY = "N"
+    WEEKLY = "W"
+    MONTHLY = "M"
