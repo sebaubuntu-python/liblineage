@@ -47,7 +47,7 @@ class Build:
             json["date"],
             datetime.fromtimestamp(json["datetime"]),
             [BuildFile.from_json(file) for file in json["files"]],
-            json["os_patch_level"],
+            json["files"][0]["os_patch_level"],
             json["type"],
             json["version"],
         )
