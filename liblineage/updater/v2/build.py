@@ -26,18 +26,17 @@ class Build:
         date: str,
         datetime: datetime,
         files: List[BuildFile],
-        os_patch_level: str,
         build_type: str,
         version: str,
     ) -> None:
         self.date = date
         self.datetime = datetime
         self.files = files
-        self.os_patch_level = os_patch_level
         self.build_type = build_type
         self.version = version
 
         self.ota_zip = self.files[0]
+        self.os_patch_level = self.ota_zip.os_patch_level
 
     @classmethod
     def from_json(cls, json: Dict[str, Any]):
@@ -47,7 +46,6 @@ class Build:
             json["date"],
             datetime.fromtimestamp(json["datetime"]),
             [BuildFile.from_json(file) for file in json["files"]],
-            json["os_patch_level"],
             json["type"],
             json["version"],
         )
