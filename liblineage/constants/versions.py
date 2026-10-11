@@ -28,6 +28,7 @@ for key, value in {
     "23.0": AndroidVersion.BAKLAVA,
     "23.1": AndroidVersion.BAKLAVA,
     "23.2": AndroidVersion.BAKLAVA,
+    "24.0": AndroidVersion.CINNAMON_BUN,
 }.items():
     LINEAGEOS_TO_ANDROID_VERSION[key] = value
     ANDROID_TO_LINEAGEOS_VERSION[value] = key
